@@ -30,7 +30,7 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
         <div className="">
           <div className="px-10">
             <div className="text-xl font-semibold text-center">
-              {type === "signin" ? "Sing In " : "Create an Account"}
+              {type === "signin" ? "Sign In " : "Create an Account"}
             </div>
             <div className="text-slate-500">
               {type === "signin"

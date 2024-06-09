@@ -1,30 +1,24 @@
-import Appbar from "../components/Appbar";
-import BlogCard from "../components/BlogCard";
-import { useBlogs } from "../hooks";
+import { useParams } from "react-router-dom";
+import { useBlog } from "../hooks";
+import FullBlog from "../components/FullBlog";
+import Spinner from "../components/Spinner";
 
 const Blog = () => {
-  const {loading, blogs} = useBlogs();
+  const params = useParams();
+  console.log(params);
+  const { loading, blog } = useBlog({ id: params.id || "" });
 
-  if(loading){
-    return <div>Loading....!</div>
+  if (loading) {
+    return (
+     <div className="h-screen flex justify-center items-center">
+      <Spinner/>
+     </div>
+    );
   }
+
   return (
     <div>
-      <Appbar />
-
-      <div className="flex justify-center">
-        <div className="">
-          {blogs?.map((blog)=>(
-            <BlogCard
-            id={blog.id}
-            authorName={blog.author.name}
-            title={blog.title}
-            content={blog.content}
-            publishedDate="7th July 2001"
-          />
-          ))}
-        </div>
-      </div>
+      <FullBlog blog={blog} />
     </div>
   );
 };
